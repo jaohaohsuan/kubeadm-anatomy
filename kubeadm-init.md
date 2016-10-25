@@ -82,3 +82,46 @@ cpu: 200m
 - 问题2 两个档案一模一样
 
 ## [CreateClientAndWaitForAPI](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/master/apiclient.go)
+
+## [UpdateMasterRoleLabelsAndTaints](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/master/apiclient.go)
+
+```
+func attemptToUpdateMasterRoleLabelsAndTaints(client *clientset.Clientset, schedulable bool) error {
+    n, err := findMyself(client)
+    if err != nil {
+        return err
+    }
+
+    # 打label
+    n.ObjectMeta.Labels["kubeadm.alpha.kubernetes.io/role"] = "master"
+
+    if !schedulable {
+        # 可控制master上的kubelet不加入调度容器, 也就是说不成为node
+        taintsAnnotation, _ := json.Marshal([]api.Taint{{Key: "dedicated", Value: "master", Effect: "NoSchedule"}})
+        n.ObjectMeta.Annotations[api.TaintsAnnotationKey] = string(taintsAnnotation)
+    }
+
+    if _, err := client.Nodes().Update(n); err != nil {
+        if apierrs.IsConflict(err) {
+            fmt.Println("<master/apiclient> temporarily unable to update master node metadata due to conflict (will retry)")
+            time.Sleep(apiCallRetryInterval)
+            attemptToUpdateMasterRoleLabelsAndTaints(client, schedulable)
+        } else {
+            return err
+        }
+    }
+
+    return nil
+}
+```
+
+## CreateDiscoveryDeploymentAndSecret
+
+TODO
+
+## [CreateEssentialAddons](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/master/addons.go)
+
+主要产生
+- kube-proxy (DaemonSet)
+- kube-dns (Deployment)
+

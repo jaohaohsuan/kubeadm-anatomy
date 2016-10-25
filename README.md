@@ -5,7 +5,12 @@
 
 ## [release](https://github.com/kubernetes/release)
 
+安装包, 以`ubuntu 16.04`作为例子
 
+- kubeadm
+- kubectl
+- kubelet
+- kubernetes-cni [bin](https://github.com/kubernetes/release/blob/master/debian/xenial/kubernetes-cni/debian/rules)
 
 ## Table of Contents
 - [kubeadm init](kubeadm-init.md)
@@ -29,7 +34,7 @@
 告诉/etc/kubernetes/manifests下的static Pods使用hyperkube image
 
 ```
-HYPERKUBE_IMAGE=gcr.io/google_containers/hyperkube
+KUBE_HYPERKUBE_IMAGE=gcr.io/google_containers/hyperkube
 ```
 
 discovery_image (TODO)
