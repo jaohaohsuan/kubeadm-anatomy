@@ -1,0 +1,34 @@
+---
+## This manifest deploys a Job which performs one time 
+# configuration of Calico 
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: configure-calico
+  namespace: kube-system
+  labels:
+    k8s-app: calico 
+spec:
+  template:
+    metadata:
+      name: configure-calico
+    spec:
+      hostNetwork: true
+      restartPolicy: OnFailure 
+      containers:
+        # Writes basic configuration to datastore. 
+        - name: configure-calico
+          image: calico/ctl:v0.22.0
+          args: 
+          - "pool"
+          - "add"
+          - "172.24.10.0/24"
+          - "--ipip"
+          - "--nat-outgoing"
+          env:
+            # The location of the etcd cluster.
+            - name: ETCD_ENDPOINTS
+              valueFrom:
+                configMapKeyRef:
+                  name: calico-config
+                  key: etcd_endpoints
