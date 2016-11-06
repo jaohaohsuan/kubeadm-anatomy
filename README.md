@@ -37,5 +37,5 @@
 KUBE_HYPERKUBE_IMAGE=gcr.io/google_containers/hyperkube
 ```
 
-## [discovery_image](https://github.com/kubernetes/kubernetes/tree/master/cluster/images/kube-discovery)
+## [kube-discovery](https://github.com/kubernetes/kubernetes/tree/master/cluster/images/kube-discovery)
 master顺带启动的一个新服务, 用于`kubeadm join`过程
