@@ -25,14 +25,15 @@ mkdir --parents /var/lib/etcd
 exec /usr/bin/docker run \
   --rm \
   -v /:/rootfs:ro \
-  -v /sys:/sys:ro \
+  -v /sys:/sys:rw \
   -v /etc/kubernetes:/etc/kubernetes:rw \
-  -v /usr/share/ca-certificates:/etc/ssl/certs \
   -v /var/lib/docker:/var/lib/docker:rw \
   -v /var/lib/kubelet:/var/lib/kubelet:rw \
   -v /etc/cni/net.d:/etc/cni/net.d:rw \
   -v /opt/cni/bin:/opt/cni/bin:rw \
   -v /var/run:/var/run:rw \
+  -v /sbin/modprobe:/sbin/modprobe:ro \
+  -v /lib/modules:/lib/modules:ro \
   --privileged=true \
   --net=host \
   --pid=host \
