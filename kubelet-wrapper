@@ -1,0 +1,40 @@
+#!/bin/bash
+# Wrapper for launching kubelet via rkt-fly stage1.
+#
+# Make sure to set KUBELET_VERSION to an image tag published here:
+# https://quay.io/repository/coreos/hyperkube?tab=tags Alternatively,
+# override $KUBELET_ACI to a custom location.
+
+set -e
+
+if [ -z "${KUBELET_VERSION}" ]; then
+    echo "ERROR: must set KUBELET_VERSION"
+    exit 1
+fi
+
+KUBELET_ACI="${KUBELET_ACI:-gcr.io/google_containers/hyperkube}"
+
+mkdir --parents /etc/kubernetes
+mkdir --parents /var/lib/docker
+mkdir --parents /var/lib/kubelet
+mkdir --parents /run/kubelet
+mkdir --parents /etc/cni/net.d
+mkdir --parents /opt/cni/bin
+mkdir --parents /var/lib/etcd
+
+exec /usr/bin/docker run \
+  --rm \
+  -v /:/rootfs:ro \
+  -v /sys:/sys:ro \
+  -v /etc/kubernetes:/etc/kubernetes:rw \
+  -v /usr/share/ca-certificates:/etc/ssl/certs \
+  -v /var/lib/docker:/var/lib/docker:rw \
+  -v /var/lib/kubelet:/var/lib/kubelet:rw \
+  -v /etc/cni/net.d:/etc/cni/net.d:rw \
+  -v /opt/cni/bin:/opt/cni/bin:rw \
+  -v /var/run:/var/run:rw \
+  --privileged=true \
+  --net=host \
+  --pid=host \
+  --security-opt seccomp=unconfined \
+  ${KUBELET_ACI}:${KUBELET_VERSION} /kubelet --containerized "$@"
