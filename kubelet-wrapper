@@ -38,3 +38,6 @@ exec /usr/bin/docker run \
   --pid=host \
   --security-opt seccomp=unconfined \
   ${KUBELET_ACI}:${KUBELET_VERSION} /kubelet --containerized "$@"
+  
+  # sample of kubelet args
+  # --network-plugin=cni --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true"
