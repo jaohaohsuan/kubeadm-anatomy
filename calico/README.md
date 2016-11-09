@@ -17,3 +17,9 @@ Step 3 create calico pool for pod CIDR configuration
 ```
 kubectl apply -f configure-calico.yml
 ```
+
+Step 4 create calico policy controller
+
+```
+kubectl apply -f calico-policy-controller.yml
+```
