@@ -6,7 +6,7 @@ RUN apk add --no-cache --virtual build-deps curl wget && \
     wget --no-check-certificate -P / https://storage.googleapis.com/kubernetes-release-dev/ci-cross/v1.5.0-alpha.2.421+a6bea3d79b8bba/bin/linux/amd64/kubeadm >/dev/null 2>&1 && \
     chmod +x kubeadm && \
     curl -sSL --fail --retry 5 \
-    https://storage.googleapis.com/kubernetes-release/network-plugins/cni-adm64-${CNI_RELEASE}.tar.gz \
+    https://storage.googleapis.com/kubernetes-release/network-plugins/cni-amd64-${CNI_RELEASE}.tar.gz \
     | tar xz && \
     mkdir -p /opt/cni && \
     mv /bin /opt/cni/ && \
