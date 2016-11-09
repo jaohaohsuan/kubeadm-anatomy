@@ -1,7 +1,7 @@
 FROM alpine:3.4
 
 RUN apk add --no-cache --virtual build-deps wget && \
-    wget -P / https://storage.googleapis.com/kubernetes-release-dev/ci-cross/v1.5.0-alpha.2.421+a6bea3d79b8bba/bin/linux/amd64/kubeadm && \
+    wget --no-check-certificate -P / https://storage.googleapis.com/kubernetes-release-dev/ci-cross/v1.5.0-alpha.2.421+a6bea3d79b8bba/bin/linux/amd64/kubeadm && \
     chmod +x kubeadm && \
     apk del build-deps && \
     rm -rf /var/cache/apk/* 
