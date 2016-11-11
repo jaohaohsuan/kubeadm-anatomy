@@ -1,5 +1,15 @@
 # kubeadm init
 
+## args
+
+```
+--token string  Shared secret used to secure cluster bootstrap; if none is provided, one will be generated for you
+```
+自己产生token
+```
+python -c 'import random; print "%0x.%0x" % (random.SystemRandom().getrandbits(3*8), random.SystemRandom().getrandbits(8*8))'
+```
+
 ## api-advertise
 
 这个IP地址很重要一旦设置错误, node也就无法join了, 所以这个IP地址必须与node之间可以互通.
