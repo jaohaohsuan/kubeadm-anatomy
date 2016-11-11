@@ -22,7 +22,10 @@
 
 ## images
 
- 依赖的[images](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/images/images.go)
+依赖的[images](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/images/images.go)
+ 
+manifests或addons
+- gcr.io/google_containers/kube-discovery-amd64:1.0
 
 ## ENV
 [这里](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/client-go/pkg/apis/kubeadm/env.go)可以看出kubernetes把档案都放到那里去了
