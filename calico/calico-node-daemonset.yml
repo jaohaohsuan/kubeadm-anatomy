@@ -25,6 +25,7 @@ spec:
         # host.
         - name: calico-node
           image: calico/node:v0.22.0
+          imagePullPolicy: IfNotPresent
           env:
             # The location of the Calico etcd cluster.
             - name: ETCD_ENDPOINTS
@@ -61,7 +62,7 @@ spec:
         # and CNI network config file on each node.
         - name: install-cni
           image: calico/cni:v1.4.2
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           command: ["/install-cni.sh"]
           env:
             # The location of the Calico etcd cluster.
