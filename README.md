@@ -7,7 +7,7 @@
 
 安装包, 以`ubuntu 16.04`作为例子
 
-- kubeadm
+- kubeadm [bin](https://github.com/kubernetes/release/blob/master/debian/xenial/kubeadm/debian/rules#L13)
 - kubectl
 - kubelet
 - kubernetes-cni [bin](https://github.com/kubernetes/release/blob/master/debian/xenial/kubernetes-cni/debian/rules)
