@@ -37,13 +37,6 @@ controller-manager
 此参数官方的意思
 >The group for which the controller-manager will auto approve all CSR(certificate signing request)s for kubelet client certificates.
 
-token创建[方式](https://github.com/kubernetes/kubernetes/blob/master/cmd/kubeadm/app/util/tokens.go)必须符合`<6 characters>.<16 characters>`格式, 或另一种用shell产生的方式
-
-```
-dd if=/dev/urandom bs=128 count=1 2>/dev/null | base64 | tr -d "=+/" | dd bs=32 count=1 2>/dev/null
-```
-
-
 [参考](http://kubernetes.io/docs/admin/authentication/)Authenticating里面的`Static Token File`那段, 产生的内容, 格式`token,user,uid,"group1,group2,group3"`
 
 
