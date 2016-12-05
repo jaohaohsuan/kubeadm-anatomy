@@ -26,11 +26,11 @@ kubectl apply -f calico-policy-controller.yml
 
 ## migrate from flannel
 
-### step 1 config kubelet with (vim /etc/default/kubelet)
+### step 1 config kubelet
 
-```
---network-plugin=cni"
-```
+Find your kubelet config file and add `--network-plugin=cni`, for example(vim /etc/default/kubelet).
+
+Extract cni [tar.gz](https://storage.googleapis.com/kubernetes-release/network-plugins/cni-amd64-07a8a28637e97b22eb8dfe710eeae1344f69d16e.tar.gz) to `/opt/cni/bin` or `apt install kubernetes-cni`
 
 ### step 2 remove docker flannel options
 
