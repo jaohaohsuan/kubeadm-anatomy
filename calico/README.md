@@ -30,7 +30,7 @@ kubectl apply -f calico-policy-controller.yml
 
 Find your kubelet config file and add `--network-plugin=cni`, for example(vim /etc/default/kubelet).
 
-Extract cni [tar.gz](https://storage.googleapis.com/kubernetes-release/network-plugins/cni-amd64-07a8a28637e97b22eb8dfe710eeae1344f69d16e.tar.gz) to `/opt/cni/bin` or `apt install kubernetes-cni`
+Extract cni [tar.gz](https://storage.googleapis.com/kubernetes-release/network-plugins/cni-amd64-07a8a28637e97b22eb8dfe710eeae1344f69d16e.tar.gz) to `/opt/cni/bin` or `apt install kubernetes-cni`(from kubeadm [installation](http://kubernetes.io/docs/getting-started-guides/kubeadm/))
 
 ### step 2 remove docker flannel options
 
@@ -74,11 +74,17 @@ EnvironmentFile=/run/docker_opts.env
 ```
 and then `rm /etc/systemd/system/docker.service.d/flannel.conf`.
 
-### last step disable and stop flannel
+### step 3 disable and stop flannel
+
 ```
 # systemctl disable flannel.service
 # systemctl stop flannel.server
+```
+### step 4 reload & restart
+
+```
 # systemctl daemon-reload
 # systemctl restart docker
 # systemctl restart kubelet
 ```
+
