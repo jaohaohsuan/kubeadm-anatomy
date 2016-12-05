@@ -54,3 +54,7 @@ master顺带启动的一个新服务, 用于`kubeadm join`过程，这里也存�
 ```
 
 这就是我们`join`时用的`fd88cc.bb32444ed38191bb`token
+
+## hyperkube
+
+[官方image](https://github.com/kubernetes/kubernetes/tree/master/cluster/images/hyperkube)
