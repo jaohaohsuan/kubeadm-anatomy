@@ -41,4 +41,16 @@ KUBE_HYPERKUBE_IMAGE=gcr.io/google_containers/hyperkube
 ```
 
 ## [kube-discovery](https://github.com/kubernetes/kubernetes/tree/master/cluster/images/kube-discovery)
-master顺带启动的一个新服务, 用于`kubeadm join`过程
+master顺带启动的一个新服务, 用于`kubeadm join`过程，这里也存了`join`时的token查看方式如下：
+```
+# disc_pod=`kubectl get po -l name=kube-discovery --namespace=kube-system --no-headers | awk '{print $1}'`
+# kubectl exec -it ${disc_pod} --namespace=kube-system cat /tmp/secret/token-map.json
+```
+
+结果像这样
+
+```
+{"fd87cc":"bb32064ed38191bb"}
+```
+
+这就是我们`join`时用的`fd88cc.bb32444ed38191bb`token
