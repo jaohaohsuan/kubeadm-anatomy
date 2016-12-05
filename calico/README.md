@@ -76,9 +76,9 @@ and then `rm /etc/systemd/system/docker.service.d/flannel.conf`.
 
 ### last step disable and stop flannel
 ```
-$ systemctl disable flannel.service
-$ systemctl stop flannel.server
-$ systemctl daemon-reload
-$ systemctl restart docker
-$ systemctl restart kubelet
+# systemctl disable flannel.service
+# systemctl stop flannel.server
+# systemctl daemon-reload
+# systemctl restart docker
+# systemctl restart kubelet
 ```
