@@ -24,7 +24,7 @@ Step 4 create calico policy controller
 kubectl apply -f calico-policy-controller.yml
 ```
 
-## migrate from flannel
+# migrate from flannel
 
 ### step 1 config kubelet
 
