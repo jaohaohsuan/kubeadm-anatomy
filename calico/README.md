@@ -79,12 +79,17 @@ and then `rm /etc/systemd/system/docker.service.d/flannel.conf`.
 ```
 # systemctl disable flannel.service
 # systemctl stop flannel.service
+# ip link del flannel.1
 ```
 ### step 4 reload & restart
 
 ```
 # systemctl daemon-reload
-# systemctl restart docker
-# systemctl restart kubelet
+# systemctl stop kube*.service
+# docker ps -a -q | xargs docker rm -f -v
+# systemctl stop docker
+# ip link del docker0
+# systemctl start docker
+# systemctl start kube*.service
 ```
 
